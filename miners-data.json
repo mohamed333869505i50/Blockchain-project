@@ -1,0 +1,42 @@
+[
+  {
+    "address": "04b1a3686e05444eb2dbbc25673803ae776a9f691e8224c9f560df36852fc870c1c6f5b67073020932c5ec7caa7772f999a3e99c406fdd51297ba142138816d7d5",
+    "privateKey": "4eab90d2d6413efd6974dbdd9c73b7d6de3ed4be71ad64324a0f1154f64bfd38",
+    "publicKey": "04b1a3686e05444eb2dbbc25673803ae776a9f691e8224c9f560df36852fc870c1c6f5b67073020932c5ec7caa7772f999a3e99c406fdd51297ba142138816d7d5",
+    "port": 3000,
+    "power": 3,
+    "name": "youssef"
+  },
+  {
+    "address": "0412096159ab20483ea9b91a063a8d9196b1dafc9a65f04bee441e0c5a34332e3b06c1bf32099553ff52aa449420826ed08f445d18a73b0706b08a9ccd729679d0",
+    "privateKey": "70edfa6a64b994afe68db023729f661d7003dfa4e2de636009be096b5db12f9f",
+    "publicKey": "0412096159ab20483ea9b91a063a8d9196b1dafc9a65f04bee441e0c5a34332e3b06c1bf32099553ff52aa449420826ed08f445d18a73b0706b08a9ccd729679d0",
+    "port": 3001,
+    "power": 2,
+    "name": "hema"
+  },
+  {
+    "address": "042b9d3a2f2cff57b1e7d3d0f5f47a82eb4dee6ded1766d9523bd6dfb798ba1038abd7fa3ea4514adbd18f7037f9807ac305e380b79a336e8045e7ffe477e342c6",
+    "privateKey": "28cd8416dd49a7eda044dfe12850e77146d071c3dca9ece2fae6dc8a1eb3f9f5",
+    "publicKey": "042b9d3a2f2cff57b1e7d3d0f5f47a82eb4dee6ded1766d9523bd6dfb798ba1038abd7fa3ea4514adbd18f7037f9807ac305e380b79a336e8045e7ffe477e342c6",
+    "port": 3002,
+    "power": 1,
+    "name": "sohail"
+  },
+  {
+    "address": "04a307f9faaf2b15c638f24c744e53bade8087d21389b9c73d535cd0e478a3ae617931655563c361902a6a592c1bd174caebd58eab81bf2cbd8845cf7311bbbda3",
+    "privateKey": "30345a6b481b5c2a2030439fa213d7cd7936b693b4aa25c1357f1ce592a1e294",
+    "publicKey": "04a307f9faaf2b15c638f24c744e53bade8087d21389b9c73d535cd0e478a3ae617931655563c361902a6a592c1bd174caebd58eab81bf2cbd8845cf7311bbbda3",
+    "port": 3003,
+    "power": 4,
+    "name": "Miner 4"
+  },
+  {
+    "address": "0487ab5e29c54886351d13ba372c916d7bd5e1b8bfba9db6e94cfda213468efc08124bcf9bb4f7dfd5c617504b406516da529c3ec319718afcdbcf8d52d7b075bd",
+    "privateKey": "9d068b4c321a1d789859561c1cdecd23c0c6fd906b8a5a009bca75dfd058f037",
+    "publicKey": "0487ab5e29c54886351d13ba372c916d7bd5e1b8bfba9db6e94cfda213468efc08124bcf9bb4f7dfd5c617504b406516da529c3ec319718afcdbcf8d52d7b075bd",
+    "port": "3005",
+    "power": "1",
+    "name": "Miner 5"
+  }
+]
