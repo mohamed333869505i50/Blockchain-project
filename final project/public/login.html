@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .login-container {
+            max-width: 400px;
+            width: 90%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h2 {
+            color: #1e3c72;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e3c72;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+
+        .form-group input:focus {
+            border-color: #1e3c72;
+            box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+            outline: none;
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+            padding-left: 5px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .success-message {
+            color: #28a745;
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: rgba(40, 167, 69, 0.1);
+            display: none;
+        }
+
+        .client-icon {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .client-icon i {
+            font-size: 3rem;
+            color: #1e3c72;
+            background: rgba(30, 60, 114, 0.1);
+            padding: 20px;
+            border-radius: 50%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-container {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Check if user is already logged in
+        if (localStorage.getItem('clientName')) {
+            window.location.href = 'index.html';
+        }
+
+        // Fetch clients data
+        let clientsData = [];
+        fetch('/clients-data.json')
+            .then(response => response.json())
+            .then(data => {
+                clientsData = data;
+            })
+            .catch(error => console.error('Error loading clients data:', error));
+    </script>
+
+    <div class="login-container">
+        <div class="client-icon">
+            <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="login-header">
+            <h2>Welcome Back!</h2>
+            <p>Please select your client name to continue</p>
+        </div>
+        <form id="loginForm" onsubmit="return validateForm(event)">
+            <div class="form-group">
+                <label for="clientName">
+                    <i class="fas fa-user me-2"></i>Client Name
+                </label>
+                <input type="text" 
+                       id="clientName" 
+                       name="clientName" 
+                       required 
+                       list="clientNames"
+                       placeholder="Select or type your name"
+                       autocomplete="off">
+                <datalist id="clientNames">
+                    <!-- Will be populated with client names -->
+                </datalist>
+                <div class="error-message" id="nameError">
+                    <i class="fas fa-exclamation-circle me-1"></i>
+                    Please select a valid client name from the list
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-sign-in-alt me-2"></i>Login
+            </button>
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle me-2"></i>Login successful! Redirecting...
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Populate datalist with client names
+        fetch('/clients-data.json')
+            .then(response => response.json())
+            .then(data => {
+                const datalist = document.getElementById('clientNames');
+                data.forEach(client => {
+                    const option = document.createElement('option');
+                    option.value = client.name;
+                    datalist.appendChild(option);
+                });
+            });
+
+        function validateForm(event) {
+            event.preventDefault();
+            
+            // Reset error messages
+            document.querySelectorAll('.error-message').forEach(error => error.style.display = 'none');
+            document.getElementById('successMessage').style.display = 'none';
+
+            const clientName = document.getElementById('clientName').value.trim();
+
+            // Validate client name exists in clients data
+            fetch('/clients-data.json')
+                .then(response => response.json())
+                .then(data => {
+                    const clientExists = data.some(client => client.name.toLowerCase() === clientName.toLowerCase());
+                    
+                    if (!clientExists) {
+                        document.getElementById('nameError').style.display = 'block';
+                        return;
+                    }
+
+                    // Find the client data
+                    const clientData = data.find(client => client.name.toLowerCase() === clientName.toLowerCase());
+                    
+                    // Store the client information
+                    localStorage.setItem('clientName', clientData.name);
+                    localStorage.setItem('clientAddress', clientData.address);
+                    localStorage.setItem('clientBalance', clientData.initialBalance);
+                    
+                    // Show success message
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Redirect to index page after a short delay
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1000);
+                })
+                .catch(error => {
+                    console.error('Error validating client:', error);
+                    document.getElementById('nameError').textContent = 'Error validating client. Please try again.';
+                    document.getElementById('nameError').style.display = 'block';
+                });
+
+            return false;
+        }
+    </script>
+</body>
+</html> 
